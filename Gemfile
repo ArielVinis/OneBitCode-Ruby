@@ -15,3 +15,6 @@ gem 'selenium-webdriver'
 # RSpec é um framework de teste para Ruby
 gem 'rspec'
 
+gem 'net-http'
+
+gem 'nokogiri'
