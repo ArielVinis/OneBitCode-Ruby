@@ -1,0 +1,44 @@
+require 'rails_helper'
+
+RSpec.describe "Enemies", type: :request do
+  describe "PUT /enemies" do
+    context "when the enemies exists" do
+      it "returns status code 200" do
+        enemy = create(:enemy)
+        enemy_attributes = attributes_for(:enemy)
+        put "/enemies/#{enemy.id}", params: enemy_attributes
+
+        expect(response).to have_http_status(200)
+      end
+
+      it "updates the enemy" do
+        enemy = create(:enemy)
+        enemy_attributes = attributes_for(:enemy)
+        put "/enemies/#{enemy.id}", params: enemy_attributes
+
+        expect(enemy.reload).to have_attributes(enemy_attributes)
+      end
+      
+      it "returns the enemy updated" do
+        enemy = create(:enemy)
+        enemy_attributes = attributes_for(:enemy)
+        put "/enemies/#{enemy.id}", params: enemy_attributes
+
+        json_response = JSON.parse(response.body)
+        expect(json_response).to eq(enemy.reload.as_json)
+      end
+      
+    end
+
+    context "when the enemies does not exists" do
+      it "returns status code 404"
+      it "returns a not found message"
+    end
+  end
+
+  describe "GET /destroy" do
+    it "returns http success" do
+    end
+  end
+
+end
